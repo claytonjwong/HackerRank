@@ -44,15 +44,31 @@ Thus, we print  on a new line.
 
 """
 
+
+dic = {}
+
 def f(i):
     
     if i < 0:
         return 0
     
     if i == 0:
+        dic[0] = 1
         return 1
     
-    return f(i-1) + f(i-2) + f(i-3)
+    step1 = f(i-1) if i-1 not in dic else dic[i-1]
+    if i-1 not in dic:
+        dic[i-1] = step1
+    
+    step2 = f(i-2) if i-2 not in dic else dic[i-2]
+    if i-2 not in dic:
+        dic[i-2] = step2
+    
+    step3 = f(i-3) if i-3 not in dic else dic[i-3]
+    if i-3 not in dic:
+        dic[i-3] = step3
+        
+    return step1 + step2 + step3
 
 s = int(input().strip())
 for a0 in range(s):
